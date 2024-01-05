@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/GCA-Admin/static/css/main.40d2b864.css",
-    "main.js": "/GCA-Admin/static/js/main.8ab09c9a.js",
+    "main.js": "/GCA-Admin/static/js/main.14f9908b.js",
     "index.html": "/GCA-Admin/index.html",
     "main.40d2b864.css.map": "/GCA-Admin/static/css/main.40d2b864.css.map",
-    "main.8ab09c9a.js.map": "/GCA-Admin/static/js/main.8ab09c9a.js.map"
+    "main.14f9908b.js.map": "/GCA-Admin/static/js/main.14f9908b.js.map"
   },
   "entrypoints": [
     "static/css/main.40d2b864.css",
-    "static/js/main.8ab09c9a.js"
+    "static/js/main.14f9908b.js"
   ]
 }
