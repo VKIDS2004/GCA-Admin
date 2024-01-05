@@ -6,8 +6,8 @@ function App() {
 
 
   const [data, setData] = useState([]);
-  const [sdata, setSData] = useState([]);
   const [sort, setSort] = useState("name");
+  const [isAuth, setIsAuth] = useState(true);
 
   const date={
     year            : 'numeric',    
@@ -26,6 +26,8 @@ const time={
 
 
   useEffect(() => {
+   
+    // if(pass ==)
     async function getData() {
       const res = await fetch(
         "https://6508523156db83a34d9c20cf.mockapi.io/api/users"
@@ -33,41 +35,38 @@ const time={
       const data = await res.json();
       // data.sort((a, b) => b.LoginCount - a.LoginCount);
       setData(data);
-      setSData(data);
-        console.log(data)
 
     }
     getData();
   }, []);
 
-  
 
     function sorting(type){
       setSort(type)
       switch(type){
         case "name":
-            setSData(old=>old.sort((a,b)=> a.rollno - b.rollno ))
+            setData(old=>old.sort((a,b)=> a.rollno - b.rollno ))
         break;
 
         case "currentLogin":
           console.log(type)
-          setSData(old=>old.sort((a,b)=> (a.currentLogin === b.currentLogin)? 0 : a.currentLogin? -1 : 1))
+          setData(old=>old.sort((a,b)=> (a.currentLogin === b.currentLogin)? 0 : a.currentLogin? -1 : 1))
           break;
           
         case "gender":
-          setSData(old=>old.sort((a,b)=> a.gender > b.gender?-1:1))
+          setData(old=>old.sort((a,b)=> a.gender > b.gender?-1:1))
           break;
           
           case "lastLogin":
-          setSData(old=>old.sort((a,b)=> b.lastLogin - a.lastLogin))
+          setData(old=>old.sort((a,b)=> b.lastLogin - a.lastLogin))
           break;
           
           case "lastLogout":
-          setSData(old=>old.sort((a,b)=> b.lastLogout - a.lastLogout))
+          setData(old=>old.sort((a,b)=> b.lastLogout - a.lastLogout))
           break;
           
           case "loginCount":
-          setSData(old=>old.sort((a,b)=> b.LoginCount - a.LoginCount))
+          setData(old=>old.sort((a,b)=> b.LoginCount - a.LoginCount))
         break;
 
         default:
@@ -76,7 +75,8 @@ const time={
       }
     }
 
-  return (
+
+  if(isAuth)return (
     <div className="App">
       
       <select name="" id="" value={sort} onChange={(e)=>sorting(e.target.value)}>
@@ -87,7 +87,7 @@ const time={
         <option value="lastLogout">last Logout</option>
         <option value="gender">gender</option>
       </select>
-      {sdata.length?<table>
+      {data.length?<table>
         <tr>
           <th >No</th>
           <th >Rollno</th>
@@ -99,7 +99,7 @@ const time={
           <th className={sort==="gender"&&"curSort"}>Gender</th>
         </tr>
         
-        { sdata.map((item,i) => <tr>
+        { data.map((item,i) => <tr>
          
           <td>{i+1}</td>
           <td>{item.rollno}</td>
@@ -120,10 +120,12 @@ const time={
           </td>
           <td>{item.gender}</td>
         </tr>)}</table>:
-        "Wait"
+        <h3>Loading.....</h3>
       }
     </div>
-  );
+  )
+  else return <h1>wrong</h1>
+  
 }
 
 export default App;
